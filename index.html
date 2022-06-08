@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]>      <html class="no-js"> <!--<![endif]-->
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>Timer</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <link rel="stylesheet" href="css/styles.css">
+  <script src="js/scripts.js" async defer></script>
+</head>
+<!------------------------------------------------------------------->
+
+<body>
+  <div class="container">
+    <div class="main-container disable-text">
+      <div class="row justify-content-center">
+        <div class="col-2" style="text-align: end;">
+          <span class="toggled" id="pmdr-button" style="cursor:pointer">
+            Pomodoro
+          </span>
+        </div>
+        <div class="col-2" style="text-align: start;">
+          <span class="" id="break-button" style="cursor:pointer">
+            Break
+          </span>
+        </div>
+
+      </div>
+      <div class="row">
+        <div id="time" class="time">
+
+        </div>
+
+      </div>
+    </div>
+    <button id="start-button" class="start-btn">
+      start
+    </button>
+    <button id="reset-button" class="start-btn">
+      reset
+    </button>
+    <div class="row">
+      <div class="col-1">
+        <label for="minutesInput:">Minutes:</label>
+        <input id='minutesInput' type="number" style="width:80px" label="minutes">
+      </div>
+      <div class="col-1">
+        <label for="secondsInput:">Seconds:</label>
+        <input id='secondsInput' type="number" style="width:80px">
+      </div>
+
+    </div>
+
+  </div>
+</body>
+
+</html>
