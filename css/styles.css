@@ -53,5 +53,14 @@ body {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
+}
 
+.history-tag{
+  background-color: rgb(237, 190, 102);
+  border-radius: 10px;
+  margin: auto;
+  min-height: 30px;
+  display:flex;
+  padding-left: 10px; 
+  margin-bottom: 5px;
 }
