@@ -1,4 +1,4 @@
-const TIME_LEN = 100
+const TIME_LEN = 1000
 //========================================================
 const endSound = new Audio('audio/bell.mp3')
 
