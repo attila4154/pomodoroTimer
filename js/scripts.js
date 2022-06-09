@@ -1,4 +1,4 @@
-const TIME_LEN = 100
+const TIME_LEN = 1000
 //========================================================
 const time = document.querySelector('#time')
 const title = document.querySelector('title')
@@ -144,8 +144,8 @@ breakButton.addEventListener('click', () => {
 })
 
 
-const workTimer = new Timer(25, 0);
-const breakTimer = new Timer(1, 0);
+const workTimer = new Timer(50, 0);
+const breakTimer = new Timer(10, 0);
 let timer = workTimer;
 drawTime(timer, time)
 
