@@ -11,14 +11,18 @@ body {
   all: initial;
   font-family: sans-serif;
   background-color: rgb(237, 190, 102);
-  margin: 5px;
+  margin-right: 0;
+  margin-left: 0;
   padding: 5px;
   text-align: center;
-  border-radius: 5px;
+  border-radius: 10px;
+  min-height: 40px;
+  min-width: 80px;
+  font-size: x-large;
 }
 
 .start-btn:hover {
-  background-color: rgb(212, 141, 9);
+  background-color: rgb(212, 149, 33);
 }
 
 .main-container {

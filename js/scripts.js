@@ -1,6 +1,7 @@
 const TIME_LEN = 1000
 //========================================================
-const endSound = new Audio('audio/bell.mp3')
+// const endSound = new Audio('audio/bell.mp3')
+const endSound = new Audio('audio/jobs_done.mp3')
 
 const time = document.querySelector('#time')
 const title = document.querySelector('title')
@@ -135,6 +136,15 @@ function updateInputs() {
   document.getElementById('secondsInput').value = timer.curSeconds
 }
 //========================================================//
+function historyTag(type, minutes) {
+  return "<div class=\"row history-tag \">" +
+    '<div class=\"col">' +
+    type + ': ' + minutes + ' min</div>' +
+    '<div class=\"col-1 float-right\">' +
+    '<strong>#' + statsCnt++ + '</strong>' +
+    '</div>'
+}
+
 class Stats {
   constructor(type, element) {
     this.type = type
@@ -155,13 +165,7 @@ class Stats {
       this.hours++
     }
     this.draw()
-    historyElement.innerHTML +=
-      "<div class=\"row history-tag \">" +
-      '<div class=\"col">' +
-      this.type + ': ' + minutes + ' min</div>' +
-      '<div class=\"col-1 float-right\">' +
-      '<strong>#' + statsCnt++ + '</strong>' +
-      '</div>'
+    historyElement.innerHTML += historyTag(this.type, this.minutes)
   }
 
 }
@@ -183,6 +187,7 @@ const workTimer = new Timer(50, 0, 'Work', workStats);
 const breakTimer = new Timer(10, 0, 'Break', breakStats);
 let timer = workTimer;
 timer.draw(time)
+
 
 
 startButton.addEventListener('click', () => { timer.toggle(startButton) })
