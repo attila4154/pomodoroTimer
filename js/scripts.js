@@ -64,9 +64,9 @@ class Timer {
 
   end() {
     this.reset()
+    this.stats.addMinutes(this.startMinutes)
     switchTimer()
     endSound.play().catch(err => { console.log('error while playing audio') })
-    this.stats.addMinutes(this.startMinutes)
   }
 
   start() {
@@ -160,12 +160,12 @@ class Stats {
 
   addMinutes(minutes) {
     this.minutes += minutes
-    if (this.minutes >= 60) {
-      this.minutes = 0
+    while (this.minutes >= 60) {
+      this.minutes -= 60
       this.hours++
     }
     this.draw()
-    historyElement.innerHTML += historyTag(this.type, this.minutes)
+    historyElement.innerHTML += historyTag(this.type, minutes)
   }
 
 }
@@ -187,7 +187,6 @@ const workTimer = new Timer(50, 0, 'Work', workStats);
 const breakTimer = new Timer(10, 0, 'Break', breakStats);
 let timer = workTimer;
 timer.draw(time)
-
 
 
 startButton.addEventListener('click', () => { timer.toggle(startButton) })
