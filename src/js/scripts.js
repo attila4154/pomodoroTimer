@@ -1,11 +1,11 @@
-const TIME_LEN = 1000
-const HISTORY_FILE = 'history.json'
+const TIME_LEN = 100
+// const HISTORY_FILE = 'history.json'
 const startState = 'Start'
 const stopState = 'Stop'
 //========================================================
 //AUDIO
-const jobsDoneSound = new Audio('audio/jobs_done.mp3')
-const workAgainSound = new Audio('audio/bell.mp3')
+const jobsDoneSound = new Audio('src/assets/audio/jobs_done.mp3')
+const workAgainSound = new Audio('src/assets/audio/bell.mp3')
 //
 const time = document.querySelector('#time')
 const title = document.querySelector('title')
