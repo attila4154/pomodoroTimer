@@ -1,13 +1,19 @@
-const TIME_LEN = 1000
+const TIME_LEN = 100
+const HISTORY_FILE = 'history.json'
+
+// const fs = require('fs')
 //========================================================
 // const endSound = new Audio('audio/bell.mp3')
-const endSound = new Audio('audio/jobs_done.mp3')
+const jobsDoneSound = new Audio('audio/jobs_done.mp3')
+const workAgainSound = new Audio('audio/bell.mp3')
 
 const time = document.querySelector('#time')
 const title = document.querySelector('title')
 
 const startButton = document.querySelector('#start-button')
 const resetButton = document.querySelector('#reset-button')
+const yesConfirmButton = document.querySelector('#yes-confirm')
+const noConfirmButton = document.querySelector('#no-confirm')
 
 const pomodoroButton = document.querySelector('#pmdr-button')
 const breakButton = document.querySelector('#break-button')
@@ -23,25 +29,24 @@ let statsCnt = 1
 
 //========================================================
 class Timer {
-  constructor(minutes, seconds, titleName, stats) {
+  constructor(minutes, seconds, titleName, stats, endSound) {
     this.startSeconds = seconds;
     this.startMinutes = minutes;
     this.curSeconds = seconds;
     this.curMinutes = minutes;
     this.titleName = titleName;
-    this.stats = stats
+    this.stats = stats;
+    this.endSound = endSound;
     this.running = false;
-    this.interval
+    this.interval;
   }
 
   reset() {
-    if (this.running) {
-      this.stop()
-      this.curSeconds = this.startSeconds;
-      this.curMinutes = this.startMinutes;
-      this.draw(time)
-      startButton.innerHTML = 'Start'
-    }
+    this.stop()
+    this.curSeconds = this.startSeconds;
+    this.curMinutes = this.startMinutes;
+    this.draw(time)
+    startButton.innerHTML = 'Start'
   }
 
   run() {
@@ -66,7 +71,7 @@ class Timer {
     this.reset()
     this.stats.addMinutes(this.startMinutes)
     switchTimer()
-    endSound.play().catch(err => { console.log('error while playing audio') })
+    this.endSound.play().catch(err => { console.log('error while playing audio') })
   }
 
   start() {
@@ -170,6 +175,34 @@ class Stats {
 
 }
 //=========================================================
+// class HistoryManager {
+//   constructor(historyFile) {
+//     this.historyFile = historyFile
+//     this.todayDate = new Date(Date.now()).toLocaleDateString()
+//     this.history = []
+//     this.read_history()
+//   }
+
+//   read_history() {
+//     fs.readFile(this.historyFile, (err, data) => {
+//       return
+//       // if (err) return;
+
+//       // const str = data.toString()
+//       // const history = JSON.parse(str).history
+//       // if (history.length == 0) return
+//       // if (history[history.length-1] != this.todayDate) return
+
+//     })
+
+//   }
+
+//   // add break or work entry to history file
+//   add_history(type, minutes) {
+
+//   }
+// }
+//==============================================================
 
 pomodoroButton.addEventListener('click', () => {
   if (timer == workTimer) return;
@@ -180,17 +213,34 @@ breakButton.addEventListener('click', () => {
   switchTimer()
 })
 
+var modal = document.getElementById('reset-confirm');
+var shade = document.getElementById('shade');
 
-const workStats = new Stats('Work', workStatsElement)
-const breakStats = new Stats('Break', breakStatsElement)
-const workTimer = new Timer(50, 0, 'Work', workStats);
-const breakTimer = new Timer(10, 0, 'Break', breakStats);
+const workStats = new Stats('Work', workStatsElement);
+const breakStats = new Stats('Break', breakStatsElement);
+const workTimer = new Timer(50, 0, 'Work', workStats, jobsDoneSound);
+const breakTimer = new Timer(10, 0, 'Break', breakStats, workAgainSound);
+// const historyManager = new HistoryManager(HISTORY_FILE);
 let timer = workTimer;
 timer.draw(time)
 
-
+//yes -> reset timer
+yesConfirmButton.addEventListener('click', () => {
+  timer.reset()
+  modal.style.display = shade.style.display = 'none';
+});
+//no -> start timer again
+noConfirmButton.addEventListener('click', () => {
+  timer.start()
+  modal.style.display = shade.style.display = 'none';
+});
+// ask user if he wants to reset timer; stop timer
 startButton.addEventListener('click', () => { timer.toggle(startButton) })
-resetButton.addEventListener('click', () => { timer.reset() })
+resetButton.addEventListener('click', () => { 
+  if (!timer.running) return;
+  modal.style.display = shade.style.display = 'block';
+  timer.stop()
+})
 
 updateInputs()
 
