@@ -1,4 +1,4 @@
-const TIME_LEN = 100
+const TIME_LEN = 1000
 // const HISTORY_FILE = 'history.json'
 const startState = 'Start'
 const stopState = 'Stop'
@@ -285,11 +285,17 @@ noConfirmButton.addEventListener('click', () => {
 minutesInput.addEventListener('change', () => {
   const minutes = Number(document.getElementById('minutesInput').value)
   if (minutes >= 90 || minutes <= 0) return
+  if (timer.running){
+    changeStartButton(startState)
+  }
   timer.setMinutes(minutes)
 })
 secondsInput.addEventListener('change', () => {
   const seconds = Number(document.getElementById('secondsInput').value)
   if (seconds >= 60 || seconds < 0) return
+  if (timer.running){
+    changeStartButton(startState)
+  }
   timer.setSeconds(seconds)
 })
 

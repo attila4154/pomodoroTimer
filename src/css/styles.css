@@ -17,6 +17,7 @@ button, .btn-small{
   text-align: center;
   border-radius: 10px;
 }
+
 button{
   min-height: 40px;
   min-width: 80px;
@@ -69,7 +70,7 @@ button:active{
 }
 
 
-.disable-text {
+.disable-text, button {
   -webkit-user-select: none;
   -webkit-touch-callout: none;
   -moz-user-select: none;
