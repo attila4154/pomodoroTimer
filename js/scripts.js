@@ -108,6 +108,13 @@ class Timer {
     this.draw(time)
   }
 
+  stopped() {
+    if (this.curMinutes == this.startMinutes && 
+        this.curSeconds == this.startSeconds)
+      return false;
+    return true;
+  }
+
   draw(time) {
     time.innerHTML = drawNumber(this.curMinutes) + ':' +
       drawNumber(this.curSeconds);
@@ -206,10 +213,12 @@ class Stats {
 
 pomodoroButton.addEventListener('click', () => {
   if (timer == workTimer) return;
+  if (timer.running || timer.stopped()) return;
   switchTimer()
 })
 breakButton.addEventListener('click', () => {
   if (timer == breakTimer) return;
+  if (timer.running || timer.stopped()) return;
   switchTimer()
 })
 
@@ -237,7 +246,7 @@ noConfirmButton.addEventListener('click', () => {
 // ask user if he wants to reset timer; stop timer
 startButton.addEventListener('click', () => { timer.toggle(startButton) })
 resetButton.addEventListener('click', () => { 
-  if (!timer.running) return;
+  if (!timer.stopped()) return;
   modal.style.display = shade.style.display = 'block';
   timer.stop()
 })
