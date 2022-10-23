@@ -6,6 +6,8 @@ const stopState = 'Stop'
 //AUDIO
 const jobsDoneSound = new Audio('src/assets/audio/jobs_done.mp3')
 const workAgainSound = new Audio('src/assets/audio/bell.mp3')
+const iconLinkOn = 'src/assets/stopwatch.png';
+const iconLinkOff = 'src/assets/stopwatch_off.png';
 //
 const time = document.querySelector('#time')
 const title = document.querySelector('title')
@@ -46,6 +48,7 @@ class Timer {
   }
 
   reset() {
+    this.changeIcon(iconLinkOff);
     this.stop()
     this.curSeconds = this.startSeconds;
     this.curMinutes = this.startMinutes;
@@ -85,11 +88,13 @@ class Timer {
   }
 
   start() {
+    this.changeIcon(iconLinkOn);
     this.running = true;
     this.run()
   }
 
   stop() {
+    this.changeIcon(iconLinkOff);
     this.running = false;
   }
 
@@ -131,6 +136,10 @@ class Timer {
       drawNumber(this.curSeconds);
     title.innerHTML = this.titleName + ': ' + drawNumber(this.curMinutes) + ':' +
       drawNumber(this.curSeconds);
+  }
+  changeIcon(iconHref){
+    var link = document.querySelector("link[rel~='icon']");
+      link.href = iconHref;
   }
 }
 
